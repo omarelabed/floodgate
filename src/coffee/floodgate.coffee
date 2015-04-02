@@ -12,8 +12,13 @@ class FloodGate
 			if not @options.separator?
 				@options.separator = @defaultOptions.separator
 
-	open: ->
-		parse @options.selectorBase, @json
+	open: =>
+		@parse @options.selectorBase, @json
+
+	print: =>
+		@printing = true
+		@open()
+		@printing = false
 
 	parse: (selectorBase, json) =>
 		for key, value of json
@@ -22,6 +27,8 @@ class FloodGate
 				if typeof value is 'object'
 					@parse currentSelector, value
 				else
-					"FloodGate.parse: #{key} : #{value}"
-					$ currentSelector
-						.html value
+					if @printing
+						console.log "set #{currentSelector} : #{value}"
+					else
+						$ currentSelector
+							.html value
