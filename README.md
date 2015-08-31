@@ -1,3 +1,3 @@
 #Floodgate
 
-Flood your html with your json.
+Flood the DOM with json.
